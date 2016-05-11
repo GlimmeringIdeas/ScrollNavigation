@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="GTh-gi-dRS">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--滚动导航条-->
+        <scene sceneID="7F9-TH-Q5J">
+            <objects>
+                <viewController id="GTh-gi-dRS" customClass="EmoScrollNavigationController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RVH-ms-oih"/>
+                        <viewControllerLayoutGuide type="bottom" id="50e-9F-dnv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Fcn-1g-tiq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vCY-Il-Mnx">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                                <color key="backgroundColor" red="0.38823529410000002" green="0.83921568629999999" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="sVg-3m-Dpg"/>
+                                </constraints>
+                            </scrollView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zU-0r-XNb">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2zU-0r-XNb" firstAttribute="leading" secondItem="Fcn-1g-tiq" secondAttribute="leading" id="Be2-pt-Pdq"/>
+                            <constraint firstAttribute="trailing" secondItem="2zU-0r-XNb" secondAttribute="trailing" id="Ebm-oc-O3L"/>
+                            <constraint firstAttribute="trailing" secondItem="vCY-Il-Mnx" secondAttribute="trailing" id="HhP-1D-ID6"/>
+                            <constraint firstItem="2zU-0r-XNb" firstAttribute="top" secondItem="vCY-Il-Mnx" secondAttribute="bottom" id="WSV-aT-HFV"/>
+                            <constraint firstItem="vCY-Il-Mnx" firstAttribute="leading" secondItem="Fcn-1g-tiq" secondAttribute="leading" id="kXl-tZ-AEz"/>
+                            <constraint firstItem="50e-9F-dnv" firstAttribute="top" secondItem="2zU-0r-XNb" secondAttribute="bottom" id="p1U-zS-Gkj"/>
+                            <constraint firstItem="vCY-Il-Mnx" firstAttribute="top" secondItem="Fcn-1g-tiq" secondAttribute="top" id="tsA-Qj-ziW"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="滚动导航条" id="oAt-Pz-fpa"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="scrollContentView" destination="2zU-0r-XNb" id="VHi-8J-bei"/>
+                        <outlet property="scrollNavigationView" destination="vCY-Il-Mnx" id="Nrr-DY-6mf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4F6-X6-SCv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="466" y="745"/>
+        </scene>
+    </scenes>
+</document>
