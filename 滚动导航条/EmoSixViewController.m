@@ -7,7 +7,7 @@
 //
 
 #import "EmoSixViewController.h"
-
+#import "EmoConst.h"
 @interface EmoSixViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-self.view.backgroundColor = [UIColor redColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {

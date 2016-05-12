@@ -7,7 +7,7 @@
 //
 
 #import "EmoFiveViewController.h"
-
+#import "EmoConst.h"
 @interface EmoFiveViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-self.view.backgroundColor = [UIColor grayColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {

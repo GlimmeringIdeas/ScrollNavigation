@@ -26,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD3BD8061CE4223300C6F3E9 /* EmoConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmoConst.h; sourceTree = "<group>"; };
 		BDC60BCD1CE39DAD00C7F77D /* 滚动导航条.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "滚动导航条.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDC60BD11CE39DAD00C7F77D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BDC60BD31CE39DAD00C7F77D /* EmoAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmoAppDelegate.h; sourceTree = "<group>"; };
@@ -90,6 +91,7 @@
 			children = (
 				BDC60BD31CE39DAD00C7F77D /* EmoAppDelegate.h */,
 				BDC60BD41CE39DAD00C7F77D /* EmoAppDelegate.m */,
+				BD3BD8061CE4223300C6F3E9 /* EmoConst.h */,
 				BDC60BD61CE39DAD00C7F77D /* EmoScrollNavigationController.h */,
 				BDC60BD71CE39DAD00C7F77D /* EmoScrollNavigationController.m */,
 				BDC60BE71CE39E3300C7F77D /* EmoOneViewController.h */,
@@ -363,6 +365,7 @@
 				BDC60BE61CE39DAD00C7F77D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

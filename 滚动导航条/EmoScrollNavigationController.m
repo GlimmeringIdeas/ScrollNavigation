@@ -17,12 +17,16 @@
 #import "EmoSevenViewController.h"
 #import "EmoEightViewController.h"
 #import "EmoNineViewController.h"
-
+#import "EmoConst.h"
 static CGFloat const labelWidth = 100;
-static CGFloat const radioSize = 1.3;
+// 修改文字显示的比例
+static CGFloat const radioSize = 0.6;
+
+
 #define ScreenWidth [UIScreen mainScreen].bounds.size.width
 
 #define ScreenHeight [UIScreen mainScreen].bounds.size.height
+
 @interface EmoScrollNavigationController ()<UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollNavigationView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollContentView;
@@ -48,7 +52,7 @@ static CGFloat const radioSize = 1.3;
 }
 
 /**
- *  添加 ScrollView
+ *  添加 ScrollView，布局contentSize的尺寸和状态
  */
 -(void)setupScrollViews {
     NSUInteger count = self.childViewControllers.count;
@@ -56,30 +60,34 @@ static CGFloat const radioSize = 1.3;
     self.scrollNavigationView.showsHorizontalScrollIndicator = NO;
     self.scrollContentView.contentSize = CGSizeMake(count * ScreenWidth , 0);
     self.scrollContentView.pagingEnabled = YES;
+    self.scrollContentView.bounces = NO;
     self.scrollContentView.showsHorizontalScrollIndicator = NO;
     self.scrollContentView.delegate = self;
 }
 
 /**
- *  添加所有子控制器的标题
+ *  添加所有子控制器的标题，创建label 并给 label 添加点击事件
  */
 -(void)setupSubViewsTitle {
     NSUInteger count = self.childViewControllers.count;
     CGFloat labelX = 0;
-    CGFloat labelY = 0;
-    CGFloat labelHeight = 64;
+    CGFloat labelY = 20;
+    CGFloat labelHeight = 44;
     for (int i = 0;  i < count; i++) {
         UIViewController * vc = self.childViewControllers[i];
         UILabel * label = [[UILabel alloc] init];
         labelX = i * labelWidth;
         label.frame = CGRectMake(labelX, labelY, labelWidth, labelHeight);
         label.text = vc.title;
-        label.highlightedTextColor = [UIColor redColor];
+        label.textColor = [UIColor whiteColor];
+        label.highlightedTextColor = RandColor;
+        label.font = [UIFont systemFontOfSize:14];
         label.tag = i;
         label.userInteractionEnabled = YES;
         label.textAlignment = NSTextAlignmentCenter;
         [self.subTitleLabel addObject:label];
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(titleClick:)];
+        [label addGestureRecognizer:tap];
         if (i == 0) {
             [self  titleClick:tap];
         }
@@ -87,6 +95,25 @@ static CGFloat const radioSize = 1.3;
     }
 }
 
+/**
+ *  设置选中状态下的标题居中
+ */
+-(void)setupTitleCenter:(UILabel *)centerLabel {
+    // 中间label的x值 = 传进来中间label的x值 - 屏幕宽度的一半
+    CGFloat offsetX = centerLabel.center.x - ScreenWidth * 0.5;
+    if (offsetX < 0) {  // 如果计算完之后是负数，证明
+        offsetX = 0;
+    }
+    CGFloat maxOffsetX = self.scrollNavigationView.contentSize.width - ScreenWidth;
+    if (offsetX > maxOffsetX) {
+        offsetX = maxOffsetX;
+    }
+    [self.scrollNavigationView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
+}
+
+/**
+ *  实现点击事件的方法
+ */
 -(void)titleClick:(UITapGestureRecognizer *)tap {
     UILabel * selectedLabel = (UILabel *)tap.view;
     [self selectedLabelTitle:selectedLabel];
@@ -97,26 +124,17 @@ static CGFloat const radioSize = 1.3;
     [self setupTitleCenter:selectedLabel];
 }
 
-// 设置标题居中
--(void)setupTitleCenter:(UILabel *)centerLabel {
-    CGFloat offsetX = centerLabel.center.x - ScreenWidth * 0.5;
-    if (offsetX < 0) {
-        offsetX = 0;
-    }
-    CGFloat maxOffsetX = self.scrollNavigationView.contentSize.width - ScreenWidth;
-    if (offsetX > maxOffsetX) {
-        offsetX = maxOffsetX;
-    }
-    [self.scrollNavigationView setContentOffset:CGPointMake(offsetX, 0) animated:YES];
-}
 
-// 选中的标题变色
+/**
+ *  设置选中 label 的颜色
+ */
 -(void)selectedLabelTitle:(UILabel *)label {
     self.selectedLabel.highlighted = NO;
     self.selectedLabel.transform = CGAffineTransformIdentity;
-    self.selectedLabel.textColor = [UIColor blackColor];
+    self.selectedLabel.textColor = [UIColor whiteColor];
     label.highlighted = YES;
-    label.transform = CGAffineTransformMakeScale(radioSize, radioSize);
+    // 设置初始化时，按钮的尺寸
+    label.transform = CGAffineTransformMakeScale(radioSize+1, radioSize+1);
     self.selectedLabel = label;
 }
 
@@ -131,15 +149,12 @@ static CGFloat const radioSize = 1.3;
     }
     CGFloat rightScale = curPage - leftIndex;
     CGFloat leftScale = 1 - rightScale;
-    leftLabel.transform = CGAffineTransformMakeScale(leftScale * 0.3 + 1, leftScale * 0.3 + 1);
-    rightLabel.transform = CGAffineTransformMakeScale (rightScale * 0.3 + 1 , rightScale * 0.3 + 1);
-    leftLabel.textColor = [UIColor colorWithRed:leftScale green:0 blue:0 alpha:1];
-    rightLabel.textColor = [UIColor colorWithRed:rightScale green:0 blue:0 alpha:1];
+    leftLabel.transform = CGAffineTransformMakeScale(leftScale * radioSize + 1, leftScale * radioSize + 1);
+    rightLabel.transform = CGAffineTransformMakeScale (rightScale * radioSize + 1 , rightScale * radioSize + 1);
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSInteger index = scrollView.contentOffset.x / scrollView.bounds.size.width;
-//    CGFloat offsetX = scrollView.contentOffset.x;
     [self showViewController:index];
     UILabel * selectedLabel = self.subTitleLabel[index];
     [self selectedLabelTitle:selectedLabel];
@@ -158,52 +173,42 @@ static CGFloat const radioSize = 1.3;
 
 - (void)setUpChildViewController
 {
-    // 头条
     EmoZeroViewController *zero = [[EmoZeroViewController alloc] init];
     zero.title = @"第一个";
     [self addChildViewController:zero];
     
-    // 热点
     EmoOneViewController *one = [[EmoOneViewController alloc] init];
     one.title = @"第二个";
     [self addChildViewController:one];
     
-    // 视频
     EmoTwoViewController *two = [[EmoTwoViewController alloc] init];
     two.title = @"第三个";
     [self addChildViewController:two];
     
-    // 社会
     EmoThreeViewController *three = [[EmoThreeViewController alloc] init];
     three.title = @"第四个";
     [self addChildViewController:three];
     
-    // 阅读
     EmoFourViewController *four = [[EmoFourViewController alloc] init];
     four.title = @"第五个";
     [self addChildViewController:four];
     
-    // 科技
     EmoFiveViewController *five = [[EmoFiveViewController alloc] init];
     five.title = @"第六个";
     [self addChildViewController:five];
     
-    // 视频
     EmoSixViewController *six = [[EmoSixViewController alloc] init];
     six.title = @"第七个";
     [self addChildViewController:six];
     
-    // 社会
     EmoSevenViewController *seven = [[EmoSevenViewController alloc] init];
     seven.title = @"第八个";
     [self addChildViewController:seven];
     
-    // 阅读
     EmoEightViewController *eight = [[EmoEightViewController alloc] init];
     eight.title = @"第九个";
     [self addChildViewController:eight];
     
-    // 科技
     EmoNineViewController *nine = [[EmoNineViewController alloc] init];
     nine.title = @"第十个";
     [self addChildViewController:nine];

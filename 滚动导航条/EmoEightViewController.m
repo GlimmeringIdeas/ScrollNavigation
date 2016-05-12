@@ -7,7 +7,7 @@
 //
 
 #import "EmoEightViewController.h"
-
+#import "EmoConst.h"
 @interface EmoEightViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-self.view.backgroundColor = [UIColor blueColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {

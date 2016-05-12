@@ -7,7 +7,7 @@
 //
 
 #import "EmoTwoViewController.h"
-
+#import "EmoConst.h"
 @interface EmoTwoViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-self.view.backgroundColor = [UIColor darkGrayColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {

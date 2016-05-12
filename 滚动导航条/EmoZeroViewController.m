@@ -7,7 +7,7 @@
 //
 
 #import "EmoZeroViewController.h"
-
+#import "EmoConst.h"
 @interface EmoZeroViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  self.view.backgroundColor = [UIColor yellowColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {

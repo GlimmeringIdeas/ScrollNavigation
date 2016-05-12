@@ -7,7 +7,7 @@
 //
 
 #import "EmoNineViewController.h"
-
+#import "EmoConst.h"
 @interface EmoNineViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-self.view.backgroundColor = [UIColor cyanColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {

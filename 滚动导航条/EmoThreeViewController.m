@@ -7,7 +7,7 @@
 //
 
 #import "EmoThreeViewController.h"
-
+#import "EmoConst.h"
 @interface EmoThreeViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {

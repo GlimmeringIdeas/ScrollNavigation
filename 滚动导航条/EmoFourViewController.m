@@ -7,7 +7,7 @@
 //
 
 #import "EmoFourViewController.h"
-
+#import "EmoConst.h"
 @interface EmoFourViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {

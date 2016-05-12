@@ -7,7 +7,7 @@
 //
 
 #import "EmoOneViewController.h"
-
+#import "EmoConst.h"
 @interface EmoOneViewController ()
 
 @end
@@ -16,7 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = RandColor;
 }
 
 - (void)didReceiveMemoryWarning {
